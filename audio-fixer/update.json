@@ -1,5 +1,5 @@
 {
   "version": "0.1.4",
-  "notes": "Updater test release. Audio Fixer 0.1.4 temporarily changes the app accent from orange to red so you can visually confirm the new version after installation. The clickable Download Update and Later buttons remain enabled.",
-  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/tree/master/audio-fixer"
+  "notes": "Updater test release. Audio Fixer 0.1.4 temporarily changes the app accent from orange to red so you can visually confirm the new version after installation. The Download Update button now opens the actual DMG file directly.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.4/AudioFixer-0.1.4-macOS-AppleSilicon.dmg"
 }
