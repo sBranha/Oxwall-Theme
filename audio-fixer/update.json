@@ -1,5 +1,5 @@
 {
-  "version": "0.1.7",
-  "notes": "Music Remover usability fix. After the free model is installed, ISOLATE SPEECH stays clickable. If no recording is loaded, clicking it now opens a file picker so you can choose the interview or audio file and start isolation directly.",
-  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.7/AudioFixer-0.1.7-macOS-AppleSilicon.dmg"
+  "version": "0.1.8",
+  "notes": "AI Music Remover / Vocal Isolator 2.0. Adds VOCALS ONLY — BEST using true Demucs AI stem separation for much stronger removal of instrumental music while keeping vocals or spoken voice. The original fast speech cleanup remains available.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.8/AudioFixer-0.1.8-macOS-AppleSilicon.dmg"
 }
