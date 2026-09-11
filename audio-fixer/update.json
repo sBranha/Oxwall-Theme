@@ -1,0 +1,5 @@
+{
+  "version": "0.1.1",
+  "notes": "Updater test release. Adds a visible Updater Test 0.1.1 badge and activates the permanent update-feed path for future Audio Fixer releases.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/tree/master/audio-fixer"
+}
