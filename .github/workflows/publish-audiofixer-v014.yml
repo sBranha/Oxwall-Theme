@@ -4,6 +4,11 @@ on:
   push:
     paths:
       - '.github/workflows/publish-audiofixer-v014.yml'
+      - 'audio-fixer/release-trigger-v014.txt'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'audio-fixer/release-trigger-v014.txt'
   workflow_dispatch:
 
 permissions:
@@ -18,9 +23,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -L --fail --retry 3 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-67a0-820c-b01d-a199dd725bca/raw?se=2026-09-11T16%3A48%3A04Z&sp=r&sv=2026-02-06&sr=b&scid=1e9e048b-53b7-56ba-af6e-fbc534435a72&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T02%3A08%3A47Z&ske=2026-09-12T02%3A08%3A47Z&sks=b&skv=2026-02-06&sig=3CNheBSTUFLWVvW5XQfavKgeh4%2BSsO2c5FnYer1etCU%3D' -o artifact.zip
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-f220-81f5-81bd-417312cc59a7/raw?se=2026-09-11T16%3A52%3A43Z&sp=r&sv=2026-02-06&sr=b&scid=2b591ebc-33e3-5ee5-b47b-4f0a0279364a&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T15%3A50%3A52Z&ske=2026-09-12T15%3A50%3A52Z&sks=b&skv=2026-02-06&sig=hd1q30Em2Krzvxytbgs6DXc2qvFTb3l7z8lRyTe3Uxc%3D' -o artifact.zip
           unzip -o artifact.zip -d artifact
-          find artifact -maxdepth 3 -type f -print
           DMG="$(find artifact -type f -name '*.dmg' | head -n 1)"
           test -n "$DMG"
           cp "$DMG" AudioFixer-0.1.4-macOS-AppleSilicon.dmg
@@ -30,5 +34,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh release view v0.1.4 >/dev/null 2>&1 || gh release create v0.1.4 --title 'Audio Fixer 0.1.4' --notes 'Red theme updater test for Audio Fixer macOS.'
-          gh release upload v0.1.4 AudioFixer-0.1.4-macOS-AppleSilicon.dmg --clobber
+          gh release view v0.1.4 >/dev/null 2>&1 || gh release create v0.1.4 --repo "$GITHUB_REPOSITORY" --title 'Audio Fixer 0.1.4' --notes 'Red theme updater test for Audio Fixer macOS.'
+          gh release upload v0.1.4 AudioFixer-0.1.4-macOS-AppleSilicon.dmg --repo "$GITHUB_REPOSITORY" --clobber
