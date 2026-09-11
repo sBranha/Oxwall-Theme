@@ -1,5 +1,5 @@
 {
-  "version": "0.1.6",
-  "notes": "Matched Windows/Mac look plus the first Audio Fixer plugin: Music Remover / Speech Isolator. It installs a free RNNoise speech model and creates a new speech-isolated WAV while leaving the original untouched.",
-  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.6/AudioFixer-0.1.6-macOS-AppleSilicon.dmg"
+  "version": "0.1.7",
+  "notes": "Music Remover usability fix. After the free model is installed, ISOLATE SPEECH stays clickable. If no recording is loaded, clicking it now opens a file picker so you can choose the interview or audio file and start isolation directly.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.7/AudioFixer-0.1.7-macOS-AppleSilicon.dmg"
 }
