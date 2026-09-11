@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
-  "notes": "Updater test release. Adds a visible Updater Test 0.1.1 badge and activates the permanent update-feed path for future Audio Fixer releases.",
+  "version": "0.1.2",
+  "notes": "Updater verification release. Confirms Audio Fixer 0.1.1 can detect a newer release from the built-in update feed. The app now shows an Updater Test 0.1.2 badge after installation.",
   "downloadURL": "https://github.com/sBranha/Oxwall-Theme/tree/master/audio-fixer"
 }
