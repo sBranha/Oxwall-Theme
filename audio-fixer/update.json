@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
-  "notes": "Clickable updater release. When a newer Audio Fixer version is available, the update window now includes a Download Update button plus Later, so you no longer have to copy the link into a browser.",
+  "version": "0.1.4",
+  "notes": "Updater test release. Audio Fixer 0.1.4 temporarily changes the app accent from orange to red so you can visually confirm the new version after installation. The clickable Download Update and Later buttons remain enabled.",
   "downloadURL": "https://github.com/sBranha/Oxwall-Theme/tree/master/audio-fixer"
 }
