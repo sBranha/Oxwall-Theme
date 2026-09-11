@@ -1,0 +1,34 @@
+name: Publish Audio Fixer 0.1.7
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-audiofixer-v017.yml'
+      - 'audio-fixer/release-trigger-v017.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built Audio Fixer artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-1fc0-81f5-af65-cace5da15ad8/raw?se=2026-09-11T19%3A41%3A05Z&sp=r&sv=2026-02-06&sr=b&scid=5a3691c3-2669-5548-8b7f-8dab2a8b71e9&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T13%3A21%3A07Z&ske=2026-09-12T13%3A21%3A07Z&sks=b&skv=2026-02-06&sig=f10HJEormkgZ62gcymI9e9t9HTmCVMuewTutKehocEQ%3D' -o artifact.zip
+          unzip -o artifact.zip -d artifact
+          DMG="$(find artifact -type f -name '*.dmg' | head -n 1)"
+          test -n "$DMG"
+          cp "$DMG" AudioFixer-0.1.7-macOS-AppleSilicon.dmg
+      - name: Publish public GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view v0.1.7 >/dev/null 2>&1 || gh release create v0.1.7 --repo "$GITHUB_REPOSITORY" --title 'Audio Fixer 0.1.7' --notes 'Music Remover usability fix. ISOLATE SPEECH remains clickable after the model is installed and opens a file picker automatically when no recording is loaded.'
+          gh release upload v0.1.7 AudioFixer-0.1.7-macOS-AppleSilicon.dmg --repo "$GITHUB_REPOSITORY" --clobber
