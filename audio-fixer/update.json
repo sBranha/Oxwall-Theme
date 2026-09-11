@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
-  "notes": "Updater test release. Audio Fixer 0.1.4 temporarily changes the app accent from orange to red so you can visually confirm the new version after installation. The Download Update button now opens the actual DMG file directly.",
-  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.4/AudioFixer-0.1.4-macOS-AppleSilicon.dmg"
+  "version": "0.1.5",
+  "notes": "Orange theme return. Selected Audio Fix and Voice Changer options now use a bright orange background with dark text and a clear checkmark; unselected options remain dark gray with white text.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/v0.1.5/AudioFixer-0.1.5-macOS-AppleSilicon.dmg"
 }
