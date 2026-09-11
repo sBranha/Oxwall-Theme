@@ -1,5 +1,5 @@
 {
-  "version": "4.7",
-  "notes": "Windows visual refresh. Audio Fixer now uses the same charcoal/black and orange design language as the Mac version, shows the installed Windows version, and includes both automatic and manual update checks.",
-  "downloadURL": ""
+  "version": "4.8",
+  "notes": "Windows 4.8 fixes the Music Remover / Speech Isolator button state. ISOLATE SPEECH stays enabled when the model is installed and opens a file picker automatically when needed.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/windows-v4.8/AudioFixer_Windows_4.8.zip"
 }
