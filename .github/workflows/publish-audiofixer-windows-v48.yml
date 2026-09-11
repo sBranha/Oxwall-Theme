@@ -1,0 +1,35 @@
+name: Publish Audio Fixer Windows 4.8
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-audiofixer-windows-v48.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built Audio Fixer Windows artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-9158-81f5-8151-f06df56708e8/raw?se=2026-09-11T20%3A34%3A55Z&sp=r&sv=2026-02-06&sr=b&scid=ae16cb7d-1d53-530f-8c9a-9b9c409dcf24&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T13%3A01%3A24Z&ske=2026-09-12T13%3A01%3A24Z&sks=b&skv=2026-02-06&sig=SJf%2BnmHn6cIkkSVlJ8BEIlycdmLiglWT26chbdg/93k%3D' -o artifact.zip
+          unzip -o artifact.zip -d artifact
+          ZIP="$(find artifact -type f -name 'AudioFixer_Windows_4.8.zip' | head -n 1)"
+          test -n "$ZIP"
+          cp "$ZIP" AudioFixer_Windows_4.8.zip
+          unzip -t AudioFixer_Windows_4.8.zip
+      - name: Publish public GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG='windows-v4.8'
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title 'Audio Fixer Windows 4.8' --notes 'Windows 4.8 fixes the Music Remover / Speech Isolator button state. ISOLATE SPEECH stays available when the model is installed and opens a file picker when needed.'
+          gh release upload "$TAG" AudioFixer_Windows_4.8.zip --repo "$GITHUB_REPOSITORY" --clobber
