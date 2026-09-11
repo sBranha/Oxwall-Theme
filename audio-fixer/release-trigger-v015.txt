@@ -1,0 +1,1 @@
+Publish Audio Fixer 0.1.5 Apple Silicon DMG as a public release asset.
