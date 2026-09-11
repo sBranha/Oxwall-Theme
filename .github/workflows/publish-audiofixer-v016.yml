@@ -1,0 +1,34 @@
+name: Publish Audio Fixer 0.1.6
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-audiofixer-v016.yml'
+      - 'audio-fixer/release-trigger-v016.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built Audio Fixer artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-3d1c-81f5-af68-8724697d32b3/raw?se=2026-09-11T18%3A17%3A17Z&sp=r&sv=2026-02-06&sr=b&scid=c739ef40-5f0b-5b4f-b969-a120b4c54412&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T02%3A13%3A03Z&ske=2026-09-12T02%3A13%3A03Z&sks=b&skv=2026-02-06&sig=DFzEqkGlDbknDxVUma2HvuinyrXhN05oRJElF%2BWSli0%3D' -o artifact.zip
+          unzip -o artifact.zip -d artifact
+          DMG="$(find artifact -type f -name '*.dmg' | head -n 1)"
+          test -n "$DMG"
+          cp "$DMG" AudioFixer-0.1.6-macOS-AppleSilicon.dmg
+      - name: Publish public GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view v0.1.6 >/dev/null 2>&1 || gh release create v0.1.6 --repo "$GITHUB_REPOSITORY" --title 'Audio Fixer 0.1.6' --notes 'Matched Windows/Mac orange-black UI plus Music Remover / Speech Isolator plugin.'
+          gh release upload v0.1.6 AudioFixer-0.1.6-macOS-AppleSilicon.dmg --repo "$GITHUB_REPOSITORY" --clobber
