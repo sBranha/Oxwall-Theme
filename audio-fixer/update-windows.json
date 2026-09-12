@@ -1,5 +1,5 @@
 {
-  "version": "4.8",
-  "notes": "Windows 4.8 fixes the Music Remover / Speech Isolator button state. ISOLATE SPEECH stays enabled when the model is installed and opens a file picker automatically when needed.",
-  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/windows-v4.8/AudioFixer_Windows_4.8.zip"
+  "version": "4.11",
+  "notes": "Windows 4.11 fixes the AI Vocal Isolator progress loop by showing Pass 1 of 4 through Pass 4 of 4 with one overall progress bar that never goes backward. It also fixes Open Output Folder and adds automatic download/install/restart updates with browser fallback.",
+  "downloadURL": "https://github.com/sBranha/Oxwall-Theme/releases/download/windows-v4.11/AudioFixer_Windows_4.11.zip"
 }
