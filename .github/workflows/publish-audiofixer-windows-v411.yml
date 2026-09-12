@@ -1,0 +1,35 @@
+name: Publish Audio Fixer Windows 4.11
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-audiofixer-windows-v411.yml'
+      - 'audio-fixer/release-trigger-windows-v411.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built Audio Fixer Windows artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-8aac-81f5-b5b7-8bea41aac301/raw?se=2026-09-12T00%3A06%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=3b9f253c-dbc8-5d4c-90f2-572fda30ea89&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T11%3A00%3A40Z&ske=2026-09-12T11%3A00%3A40Z&sks=b&skv=2026-02-06&sig=ISwLDj4/vuiA8BYeACMZjjy09PYKFb6Qvs8BPwypDJs%3D' -o artifact.zip
+          unzip -o artifact.zip -d artifact
+          ZIP="$(find artifact -type f -name 'AudioFixer_Windows_4.11.zip' | head -n 1)"
+          test -n "$ZIP"
+          cp "$ZIP" AudioFixer_Windows_4.11.zip
+          unzip -t AudioFixer_Windows_4.11.zip
+      - name: Publish public GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view windows-v4.11 >/dev/null 2>&1 || gh release create windows-v4.11 --repo "$GITHUB_REPOSITORY" --title 'Audio Fixer Windows 4.11' --notes 'Windows 4.11 fixes the AI Vocal Isolator progress loop by showing the four real htdemucs_ft model passes as Pass 1 of 4 through Pass 4 of 4 with an overall progress bar that never goes backward. It also fixes Open Output Folder and adds automatic download/install/restart updating with browser fallback.'
+          gh release upload windows-v4.11 AudioFixer_Windows_4.11.zip --repo "$GITHUB_REPOSITORY" --clobber
